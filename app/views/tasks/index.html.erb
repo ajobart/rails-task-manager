@@ -1,8 +1,23 @@
-<h1>My tasks</h1>
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= link_to task.title, task_path(task) %></li>
-  <% end %>
-</ul>
-
-<%= link_to "Add a new task", task_new_path %>
+<div class="container-main">
+  <h1>My tasks</h1>
+  <div class="container-list">
+    <ul>
+      <% @tasks.each do |task| %>
+        <% if task.completed %>
+          <div class="task-card-completed">
+            <li><input type="checkbox" id="completed" name="scales" checked>
+              <%= link_to task.title, task_path(task), :class => "list-check" %>
+            </li>
+          </div>
+        <% else %>
+            <div class="task-card-uncompleted">
+              <li><input type="checkbox" id="completed" name="scales"><%= link_to task.title, task_path(task), :class => "list" %></li>
+            </div>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+    <%= link_to task_new_path, :class => "add-btn" do %>
+      <i class="fas fa-plus-circle"></i> Add a new task
+      <% end %>
+</div>
